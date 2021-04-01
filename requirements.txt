@@ -2,3 +2,7 @@ numpy
 pandas
 jupyter
 matplotlib
+scikit-image
+opencv-python
+ipykernel
+scikit-learn
