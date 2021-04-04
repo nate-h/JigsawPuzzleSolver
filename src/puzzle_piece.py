@@ -23,7 +23,7 @@ class PuzzlePiece:
 
         # Bounding box.
         self.x, self.y, self.w, self.h = cv2.boundingRect(self.contour)
-        padding = 5
+        padding = 10
         self.x -= padding
         self.y -= padding
         self.w += 2 * padding
@@ -35,12 +35,21 @@ class PuzzlePiece:
         # box = np.int0(box)
         # im = cv2.drawContours(im,[box],0,(0,0,255),2)
 
-    def extract_image(self, labeled_pieces):
+    def extract_images(self, labeled_pieces, grayScaleMasked, imgRGB):
         """Extract image of self."""
+        self.imgRGB = imgRGB[
+            self.y: self.y + self.h,
+            self.x: self.x + self.w,
+            :
+        ]
         self.image = labeled_pieces[
             self.y: self.y + self.h,
             self.x: self.x + self.w,
             :
+        ]
+        self.grayScaleMasked = grayScaleMasked[
+            self.y: self.y + self.h,
+            self.x: self.x + self.w
         ]
 
     @property

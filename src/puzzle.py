@@ -21,9 +21,12 @@ class Puzzle:
     # def help_find_green_screen(self):
     #     pass
 
-    def create_pieces(self, contoured_image, contours):
+    def create_pieces(self, contoured_image, alteredMaskApplied, imgRGB, contours):
 
+        self.imgRGB = imgRGB
         self.contoured_image = contoured_image
+        self.grayScaleMasked = cv2.cvtColor(alteredMaskApplied, cv2.COLOR_BGR2GRAY)
+        self.grayScaleMasked = np.float32(self.grayScaleMasked)
         self.labeled_pieces = np.copy(self.contoured_image)
         self.contours = contours
 
@@ -39,7 +42,7 @@ class Puzzle:
 
         # Let pieces extract images of them self.
         for piece in self.pieces:
-            piece.extract_image(self.labeled_pieces)
+            piece.extract_images(self.labeled_pieces, self.grayScaleMasked, self.imgRGB)
 
 
 
