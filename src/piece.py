@@ -3,12 +3,13 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from IPython.display import Image
 from sklearn.cluster import KMeans
-import  PIL
+import PIL
 import cv2 as cv
 from scipy import ndimage, misc
 import cv2
 
-class PuzzlePiece:
+
+class Piece:
     def __init__(self, index, contour):
 
         self.index = index
@@ -16,9 +17,9 @@ class PuzzlePiece:
 
         # Calculate center, area, perimeter.
         M = cv2.moments(self.contour)
-        self.area = M['m00']
-        self.cx = int(M['m10'] / self.area)
-        self.cy = int(M['m01'] / self.area)
+        self.area = M["m00"]
+        self.cx = int(M["m10"] / self.area)
+        self.cy = int(M["m01"] / self.area)
         self.arc_length = cv2.arcLength(self.contour, True)
 
         # Bounding box.
@@ -37,19 +38,12 @@ class PuzzlePiece:
 
     def extract_images(self, labeled_pieces, grayScaleMasked, imgRGB):
         """Extract image of self."""
-        self.imgRGB = imgRGB[
-            self.y: self.y + self.h,
-            self.x: self.x + self.w,
-            :
-        ]
+        self.imgRGB = imgRGB[self.y : self.y + self.h, self.x : self.x + self.w, :]
         self.image = labeled_pieces[
-            self.y: self.y + self.h,
-            self.x: self.x + self.w,
-            :
+            self.y : self.y + self.h, self.x : self.x + self.w, :
         ]
         self.grayScaleMasked = grayScaleMasked[
-            self.y: self.y + self.h,
-            self.x: self.x + self.w
+            self.y : self.y + self.h, self.x : self.x + self.w
         ]
 
     @property

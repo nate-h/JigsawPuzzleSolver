@@ -9,7 +9,7 @@ Steps to get environment up
 
 ```sh
     virtualenv -p python3 JigsawPuzzleSolver
-    ./JigsawPuzzleSolver/bin/activate
+    source ./JigsawPuzzleSolver/bin/activate
     pip install -r requirements.txt
     JigsawPuzzleSolver/bin/jupyter notebook
     python -m ipykernel install --user --name=JigsawPuzzleSolver
