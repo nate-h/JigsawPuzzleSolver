@@ -18,10 +18,6 @@ class Puzzle:
         self.image = cv.imread(self.image_path)
         self.hsv = cv.cvtColor(self.image, cv.COLOR_BGR2HSV)
 
-    # Elegantly extract useful functions.
-    # def help_find_green_screen(self):
-    #     pass
-
     def create_pieces(self, contoured_image, alteredMaskApplied, imgRGB, contours):
 
         self.imgRGB = imgRGB
@@ -51,6 +47,10 @@ class Puzzle:
         # Let pieces extract images of them self.
         for piece in self.pieces:
             piece.extract_images(self.labeled_pieces, self.grayScaleMasked, self.imgRGB)
+
+    def show(self):
+        plt.imshow(self.labeled_pieces)
+        plt.show()
 
     def solve(self):
         pass
